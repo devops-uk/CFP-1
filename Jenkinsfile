@@ -5,16 +5,6 @@ pipeline {
             steps {
                 echo 'hello jenkins'
             }
-            stage('Test') {
-                steps {
-                       echo 'hello jenkins'
-                }
-            }
-            stage('Deploy') {
-                steps {
-                       echo 'hello jenkins'
-                }
-            }
         }
     }
 }
