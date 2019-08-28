@@ -1,10 +1,20 @@
 pipeline {
-    agent { 
-    }
+    agent any
     stages {
         stage('build') {
             steps {
+                sh './setup.sh'
                 echo 'hello jenkins'
+            }
+            stage('Test') {
+                steps {
+                       echo 'hello jenkins'
+                }
+            }
+            stage('Deploy') {
+                steps {
+                       echo 'hello jenkins'
+                }
             }
         }
     }
