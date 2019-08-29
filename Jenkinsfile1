@@ -1,0 +1,22 @@
+pipeline{
+agent {dockefile true }
+stages{
+stage('clone'){
+}stage('build'){
+steps{
+sh 'docker build -t DockerFile1'
+sh 'docker run -it -d DockerFile1'
+}
+stage('Test'){
+steps{
+sh 'docker build -t DockerFile1'
+echo "docker image tested"
+}
+}
+stage('Deploy'){
+steps{
+sh 'sudo docker push naveenkumaraluthuri DockerFile1'
+}
+}
+}
+}}
