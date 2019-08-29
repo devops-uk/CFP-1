@@ -1,11 +1,8 @@
 pipeline {
-  agent {
-    dockefile true 
+  agent any{
+    dockefile1 true 
     }
    stages {
-      stage('clone'){
-      
-      } 
       stage('build') {
           steps {
                 sh 'docker build -t DockerFile1'
