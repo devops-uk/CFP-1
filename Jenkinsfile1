@@ -3,21 +3,21 @@ pipeline {
    stages {
       stage('build') {
           steps {
-                sh 'docker build -t DockerFile1:2'
+                sh 'docker build -t Dockerfile'
                 
                 }
       }    
         stage('Test') {
               steps {
-                     sh 'docker build -t DockerFile1:2'
-                     sh 'docker run  DockerFile1:2'
+                     sh 'docker build -t Dockerfile'
+                     sh 'docker run  Dockerfile'
                     echo "docker image tested"
                     }
            }
           stage('Deploy') {
               steps {
-              sh 'docker run  DockerFile1:2'
-                    sh 'sudo docker push naveenkumaraluthuri DockerFile1'
+              sh 'docker run  Dockerfile'
+                    sh 'sudo docker push naveenkumaraluthuri Dockerfile'
                   }
             }
   }
