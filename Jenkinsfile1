@@ -3,19 +3,19 @@ pipeline {
    stages {
    stage('build'){
    steps{
-      sh 'docker build https://github.com/devops-uk/TESTJENKINS.git '
+      sh 'docker build my-image . '
    }
    }
       stage('Test') {
               steps {
                  
-                     sh 'docker run -it  Dockerfile'
+                     sh 'docker run -it  my-image'
                     echo "docker image tested"
                     }
            }
           stage('Deploy') {
               steps {
-              sh 'docker run -it  Dockerfile'
+              sh 'docker run -it  my-image'
                     sh 'docker push naveenkumaraluthuri Dockerfile'
                   }
             }
