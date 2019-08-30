@@ -9,14 +9,14 @@ pipeline {
       stage('Test') {
               steps {
                  
-                     sh 'docker run -it Dockerfile'
+                     sh 'docker run -it myDockerImage'
                     echo "docker image tested"
                     }
            }
           stage('Deploy') {
               steps {
-              sh 'docker run -it  Dockerfile'
-                    sh 'docker push naveenkumaraluthuri Dockerfile'
+              sh 'docker run -it  myDockerImage'
+                    sh 'docker push naveenkumaraluthuri myDockerImage'
                   }
             }
   }
