@@ -3,7 +3,7 @@ pipeline {
    stages {
    stage('build'){
    steps{
-      sh 'docker build . '
+      sh 'docker build https://github.com/devops-uk/TESTJENKINS.git '
    }
    }
       stage('Test') {
