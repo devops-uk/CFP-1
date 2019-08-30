@@ -1,22 +1,16 @@
 pipeline {
   agent any
    stages {
-      stage('build') {
-          steps {
-                sh 'docker build -t Dockerfile'
-                
-                }
-      }    
-        stage('Test') {
+      stage('Test') {
               steps {
-                     sh 'docker build -t Dockerfile'
-                     sh 'docker run  Dockerfile'
+                 
+                     sh 'docker run -it -d Dockerfile'
                     echo "docker image tested"
                     }
            }
           stage('Deploy') {
               steps {
-              sh 'docker run  Dockerfile'
+              sh 'docker run -it -d Dockerfile'
                     sh 'sudo docker push naveenkumaraluthuri Dockerfile'
                   }
             }
