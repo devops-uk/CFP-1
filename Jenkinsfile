@@ -3,7 +3,7 @@ pipeline {
    stages {
    stage('build'){
    steps{
-      sh 'docker build -f myDockerImage .'
+      sh 'docker build . Dockerfile '
    }
    }
       stage('Test') {
