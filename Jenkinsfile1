@@ -3,20 +3,20 @@ pipeline {
    stages {
    stage('build'){
    steps{
-      sh 'sudo docker build . '
+      sh 'docker build . '
    }
    }
       stage('Test') {
               steps {
                  
-                     sh 'sudo docker run -it  Dockerfile'
+                     sh 'docker run -it  Dockerfile'
                     echo "docker image tested"
                     }
            }
           stage('Deploy') {
               steps {
-              sh 'sudo docker run -it  Dockerfile'
-                    sh 'sudo docker push naveenkumaraluthuri Dockerfile'
+              sh 'docker run -it  Dockerfile'
+                    sh 'docker push naveenkumaraluthuri Dockerfile'
                   }
             }
   }
