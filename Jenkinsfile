@@ -3,13 +3,13 @@ pipeline {
    stages {
    stage('build'){
    steps{
-      sh 'docker build -t my-image/Dockerfile .'
+      sh 'docker build -t my-image/dockerfile .'
    }
    }
       stage('Test') {
               steps {
                  
-                     sh 'docker run -it Dockerfile'
+                     sh 'docker run -it dockerfile'
                     echo "docker image tested"
                     }
            }
