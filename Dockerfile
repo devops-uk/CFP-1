@@ -1,4 +1,4 @@
-FROM ubuntu:14.0
+FROM ubuntu
 RUN mkdir /root/packer
 WORKDIR /root/packer
 RUN wget https://releases.hashicorp.com/packer/1.1.3/packer_1.1.3_linux_amd64.zip
