@@ -4,6 +4,7 @@
     stage('pull'){
    steps{
       sh 'docker pull python'
+    }
    }
    stage('build'){
    steps{
