@@ -15,7 +15,6 @@ FROM python:3
 WORKDIR /usr/src/app
 COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
-COPY . .
 CMD [ "python", "./your-daemon-or-script.py" ]
 # Install Ansible.
 RUN pip install ansible
@@ -23,9 +22,5 @@ RUN pip install ansible
 WORKDIR /data
 # Define default command.
 CMD ["bash"]
-RUN unzip git.zip
-WORKDIR /root/git/git-2.9.5
-RUN make configure
-RUN ./configure --prefix=/usr
 RUN make all
 RUN make install
