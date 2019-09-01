@@ -8,12 +8,12 @@
   }
     stage('Test'){
    steps{
-      sh 'docker run -d -it dockerfile'
+     sh
    }
    }
     stage('Deploy'){
    steps{
-      sh 'docker push sravanik138/nodeapp'
+      sh
    }
   }
  }
