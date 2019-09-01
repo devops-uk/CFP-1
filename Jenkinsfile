@@ -29,17 +29,13 @@ pipeline {
       parallel {
         stage('RUN') {
           steps {
-            sh 'docker run --name nodeapp-dev --network="bridge" -d \
-            -p 8080:8080 .'
-            sh 'docker run --name test-image -v $PWD:/JUnit --network="bridge" \
-            --link=nodeapp-dev -d -p 8080:8080 \
-            test-image:latest'
+           // sh 'docker run --name nodeapp --network="bridge" -d \-p 8080:8080 .'
+            sh 'docker run -d -it dockerfile .'
           }
         }
         stage('Quality Tests') {
           steps {
             sh 'docker login --username $DOCKER_USR --password $DOCKER_PSW'
-            sh 'docker tag nodeapp-dev:trunk <DockerHub Username>/nodeapp-dev:latest'
             sh 'docker push <DockerHub Username>/nodeapp-dev:latest'
           }
         }
@@ -59,33 +55,25 @@ pipeline {
 // Deploying your Software
     stage('DEPLOY') {
           when {
-           branch 'jenkins'  //only run these steps on the master branch
+           branch 'docker'  //only run these steps on the docker branch
           }
             steps {
                     retry(3) {
                         timeout(time:10, unit: 'MINUTES') {
-                            sh 'docker tag nodeapp-dev:trunk <DockerHub Username>/nodeapp-prod:latest'
-                            sh 'docker push <GITHub Username>/nodeapp-prod:latest'
-                            sh 'docker save <GITHub Username>/nodeapp-prod:latest | gzip > nodeapp-prod-golden.tar.gz'
+                            sh 'docker tag nodeapp:trunk <DockerHub Username>/nodeapp:latest'
+                            sh 'docker push <GITHub Username>/nodeapp:latest'
+                            sh 'docker save <GITHub Username>/nodeapp:latest | gzip > nodeapp-golden.tar.gz'
                         }
                     }
 
             }
             post {
                 failure {
-                    sh 'docker stop nodeapp-dev test-image'
+                    sh 'docker stop nodeapp test-image'
                     sh 'docker system prune -f'
                     deleteDir()
                 }
             }
-    }
-// JUnit reports and artifacts saving
-    stage('REPORTS') {
-      steps {
-        junit 'reports.xml'
-        archiveArtifacts(artifacts: 'reports.xml', allowEmptyArchive: true)
-        archiveArtifacts(artifacts: 'nodeapp-prod-golden.tar.gz', allowEmptyArchive: true)
-      }
     }
 // Doing containers clean-up to avoid conflicts in future builds
     stage('CLEAN-UP') {
