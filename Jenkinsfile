@@ -5,6 +5,7 @@
    steps{
       sh 'docker build .'
    }
+  }
     stage('Test'){
    steps{
       sh 'docker build .'
