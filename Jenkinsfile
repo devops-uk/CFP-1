@@ -3,7 +3,7 @@
    stages {
    stage('build'){
    steps{
-      sh 'docker build -f Dockerfile .'
+      sh 'docker build .'
    }
    }
       stage('Test') {
