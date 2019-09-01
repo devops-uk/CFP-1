@@ -55,13 +55,6 @@ pipeline {
                         }
                     }
                 }
-            post {
-                failure {
-                    sh 'docker stop nodeapp test-image'
-                    sh 'docker system prune -f'
-                    deleteDir()
-                }
-            }
         }
   }
 }
