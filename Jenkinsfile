@@ -9,22 +9,15 @@ pipeline {
       parallel {
         stage('Image') {
           steps {
-            sh 'docker build -f express-image/Dockerfile .'
+            sh 'docker build .'
           }
         }
-        stage('Test') {
+        stage('Test image') {
           steps {
-            sh 'docker build -f test-image/Dockerfile .'
+            sh 'docker build  .'
           }
         }
       }
-      post {
-        failure {
-            echo 'This build has failed. See logs for details.'
-        }
-      }
-    }
-// Performing Software Tests
     stage('TEST') {
       parallel {
         stage('RUN') {
@@ -34,9 +27,8 @@ pipeline {
           }
         }
         stage('Quality Tests') {
-          steps {
-            sh 'docker login --username $DOCKER_USR --password $DOCKER_PSW'
-            sh 'docker push <DockerHub Username>/nodeapp-dev:latest'
+            steps {
+            sh 'docker push sravanik138/nodeapp:latest'
           }
         }
       }
@@ -75,13 +67,3 @@ pipeline {
                 }
             }
     }
-// Doing containers clean-up to avoid conflicts in future builds
-    stage('CLEAN-UP') {
-      steps {
-        sh 'docker stop nodeapp-dev test-image'
-        sh 'docker system prune -f'
-        deleteDir()
-      }
-    }
-  }
-}
