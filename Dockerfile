@@ -11,10 +11,10 @@ RUN mv packer /usr/local/bin/packer
 RUN mv terraform /usr/local/bin/terraform
 RUN rm packer_1.1.3_linux_amd64.zip
 RUN rm terraform_0.11.1_linux_amd64.zip
-FROM python:3
-WORKDIR /usr/src/app
-RUN pip install --no-cache-dir -r requirements.txt
-CMD [ "python", "./your-daemon-or-script.py" ]
+RUN \
+  apt-get update && \
+  apt-get install -y python python-dev python-pip python-virtualenv && \
+  rm -rf /var/lib/apt/lists/
 # Install Ansible.
 RUN pip install ansible
 # Define working directory.
