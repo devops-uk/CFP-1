@@ -8,12 +8,10 @@
   }
     stage('Test'){
    steps{
-     sh
    }
    }
     stage('Deploy'){
    steps{
-      sh
    }
   }
  }
