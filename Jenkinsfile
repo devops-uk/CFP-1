@@ -5,9 +5,7 @@ pipeline {
   agent any
   stages {
 // Building your Test Images
-    stage('BUILD') {
-      parallel {
-        stage('Image') {
+    stage('BUILDING') {
           steps {
             sh 'docker build .'
           }
@@ -17,8 +15,7 @@ pipeline {
             sh 'docker build  .'
           }
         }
-      }
-    stage('TEST') {
+    stage('TESTING') {
       parallel {
         stage('RUN') {
           steps {
@@ -26,7 +23,7 @@ pipeline {
             sh 'docker run -d -it dockerfile .'
           }
         }
-        stage('Quality Tests') {
+        stage('PUSH') {
             steps {
             sh 'docker push sravanik138/nodeapp:latest'
           }
@@ -57,8 +54,7 @@ pipeline {
                             sh 'docker save <GITHub Username>/nodeapp:latest | gzip > nodeapp-golden.tar.gz'
                         }
                     }
-
-            }
+                }
             post {
                 failure {
                     sh 'docker stop nodeapp test-image'
@@ -66,5 +62,6 @@ pipeline {
                     deleteDir()
                 }
             }
-    }
+        }
   }
+}
