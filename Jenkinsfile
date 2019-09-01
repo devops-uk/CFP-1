@@ -6,13 +6,5 @@
       sh 'docker build .'
    }
   }
-    stage('Test'){
-   steps{
-   }
-   }
-    stage('Deploy'){
-   steps{
-   }
-  }
  }
  }
