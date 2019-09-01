@@ -8,8 +8,7 @@
   }
     stage('Test'){
    steps{
-      sh 'docker build .'
-      sh 'docker run -it -d .'
+      sh 'docker run -d -it dockerfile'
    }
    }
     stage('Deploy'){
